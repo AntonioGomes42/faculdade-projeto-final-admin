@@ -1,0 +1,32 @@
+{
+  "name": "projeto_pratica_profissional",
+  "version": "1.0.0",
+  "description": "Este é projeto é destinado ao projeto final da matéria de prática profissional.",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "sass": "sass --no-source-map --watch public/sass:public/css",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "prática profissional",
+    "nodejs",
+    "javascript",
+    "firebase",
+    "admin",
+    "administrador"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "firebase": "^9.8.2",
+    "serve-favicon": "^2.5.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16",
+    "sass": "^1.52.1"
+  }
+}
