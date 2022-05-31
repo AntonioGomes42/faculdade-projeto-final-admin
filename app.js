@@ -1,7 +1,7 @@
 import express from "express";
-import { getAdvices, getAdviceById, createAdvice, updateAdvice } from "./services/advices.services.js";
-import { areNotAdvicesVoidFields, isNotVoid } from "./utils/areNotFieldsVoid.js";
+import { getAdvices, getAdviceById, createAdvice, updateAdvice, deleteAdvice } from "./services/advices.services.js";
 
+const port = 3000;
 const server = express();
 
 server.use(express.urlencoded({ extended: false }));
@@ -13,6 +13,9 @@ server.get("/advices", async (req, res) => {
 
 server.get("/advices/:id", async (req, res) => {
     try {
+        if (!(JSON.parse(JSON.stringify(req.params)).hasOwnProperty("id"))) {
+            throw new Error("Informe o id do advice pelos parametros.")    
+        }
         res.send(await getAdviceById(req.params.id));
     } catch (error) {
         res.status(400).send(error.message);
@@ -31,8 +34,9 @@ server.post("/advices", async (req, res) => {
 
 server.put("/advices/:id", async (req, res) => {
     try {
-        isNotVoid(req.params.id, "Informe um id, parametro não pode ser vazio.");
-        console.log();
+        if (!(JSON.parse(JSON.stringify(req.params)).hasOwnProperty("id"))) {
+            throw new Error("Informe o id do advice pelos parametros.")    
+        }
         const updatedAdvice = await updateAdvice(req.params.id, req.body);
         res.status(200).send(updatedAdvice);
     } catch (error) {
@@ -41,6 +45,18 @@ server.put("/advices/:id", async (req, res) => {
     }
 });
 
-server.listen(3000, () => {
-    console.log("Server running at http://localhost:3000");
+server.delete("/advices/:id", async (req, res) => {
+    try {
+        if (!(JSON.parse(JSON.stringify(req.params)).hasOwnProperty("id"))) {
+            throw new Error("Informe o id do advice pelos parametros.")    
+        }
+        const deletedAdvice = await deleteAdvice(req.params.id);
+        res.status(200).send(deletedAdvice);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+})
+
+server.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 })

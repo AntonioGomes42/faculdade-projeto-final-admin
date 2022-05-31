@@ -1,4 +1,4 @@
-import { updateDoc, getDoc, getDocs, setDoc, doc, collection } from "firebase/firestore";
+import { deleteDoc, updateDoc, getDoc, getDocs, setDoc, doc, collection } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import db from "../database/firebaseDataBase.js";
 import Advice from "./dto/create-advice.dto.js";
@@ -32,7 +32,7 @@ async function getAdviceById(id) {
     const advice = docSnap.data();
     return advice;
   } else {
-    throw new Error("Não há nenhum aviso registrado com o id: " + id);
+    throw new Error("Não há nenhum aviso registrado com o id: " + id+".");
   }
 }
 
@@ -73,7 +73,12 @@ async function createAdvice(body) {
 }
 
 async function updateAdvice(id, body) {
-  await getAdviceById(id);
+  try {
+    await getAdviceById(id);
+  } catch (error) {
+    throw error;
+  }
+  
   const dataUpdate = {};
   
   if (JSON.parse(JSON.stringify(body)).hasOwnProperty("day")) {
@@ -104,4 +109,14 @@ async function updateAdvice(id, body) {
   }
 }
 
-export { getAdvices, getAdviceById, createAdvice, updateAdvice };
+async function deleteAdvice(id) {
+  try {
+    await getAdviceById(id);
+    await deleteDoc(doc(db, "advices", id));
+    return { deletedAdvice: id };
+  } catch (error) {
+    throw error;
+  }
+}
+
+export { getAdvices, getAdviceById, createAdvice, updateAdvice, deleteAdvice };
