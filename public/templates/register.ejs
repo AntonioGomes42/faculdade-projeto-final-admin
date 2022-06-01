@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/login.css">
+    <title>infoChurch Admin</title>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>Cadastrar</h1>
+                <p>Insira os dados abaixo para cadastrar o seu usuário.</p>
+                <input type="email" placeholder="Digite seu nome" required  oninvalid="this.setCustomValidity('Insira o seu nome, este campo é obrigatório.')"
+                oninput="this.setCustomValidity('')" />
+                <input type="email" placeholder="Digite o email" required  oninvalid="this.setCustomValidity('Insira o email, este campo é obrigatório.')"
+                oninput="this.setCustomValidity('')" />
+                <input type="password" placeholder="Digite a senha" required  oninvalid="this.setCustomValidity('Insira a senha, este campo é obrigatório.')"
+                oninput="this.setCustomValidity('')" />
+                <button>Cadastrar</button>
+                <span id="span-account">
+                    Já possui uma conta? <a href="/login"><b>Clique aqui para logar</b></a>
+                </span>
+            </form>
+        </div>
+    </div>
+    <script src="../scripts/register.js"></script>
+</body>
+</html>

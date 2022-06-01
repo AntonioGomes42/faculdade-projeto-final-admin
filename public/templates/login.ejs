@@ -10,16 +10,24 @@
 <body>
     <div class="container" id="container">
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form id="login-form" action="#">
                 <h1>Log-in</h1>
-                <p>Olá, bem vindo! Para continuar digite a senha para ter acesso ao painel administrativo.</p>
-                <input type="password" placeholder="Digite a senha" required  oninvalid="this.setCustomValidity('Insira a senha, este campo é obrigatório.')"
+                <p>Olá, bem vindo! Para continuar digite o email e senha para ter acesso ao painel administrativo.</p>
+                <input type="email" id="email" placeholder="Digite o email" required  oninvalid="this.setCustomValidity('Insira o email, este campo é obrigatório.')"
                 oninput="this.setCustomValidity('')" />
-                <button>Logar</button>
+                <input type="password" id="password" placeholder="Digite a senha" required  oninvalid="this.setCustomValidity('Insira a senha, este campo é obrigatório.')"
+                oninput="this.setCustomValidity('')" />
+                <button id="login-btn">Logar</button>
+                <span id="span-account">
+                    Ainda não possui uma conta? <a href="/cadastro"><b>Clique aqui para registrar</b></a>
+                </span>
             </form>
         </div>
-    </div>
-    <script>
-    </script>
+    </div>    
+    
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../scripts/login.js"></script>
 </body>
 </html>

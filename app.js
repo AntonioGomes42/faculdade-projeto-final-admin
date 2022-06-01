@@ -4,6 +4,7 @@ import path from "path";
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import favicon from "serve-favicon";
+import { createUser, loginUser } from "./services/auth.js";
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -11,14 +12,34 @@ const port = 3000;
 const server = express();
 
 server.use(express.urlencoded({ extended: false }));
-server.use(express.json());
 server.use(favicon(path.join(__dirname, 'public', 'images/favicon.ico')))
 server.use(express.static('public'));
 server.set('view engine', 'ejs');
 server.set('views', path.join(__dirname, '/public/templates'));
+server.use(express.json());
 
 server.get("/login", async (req, res) => {
     res.render('login');
+});
+
+server.get("/cadastro", async (req, res) => {
+    res.render('register');
+});
+
+server.post("/api/cadastro", async (req, res) => {
+    try {
+        res.json(await createUser(req.body));
+    } catch (error) {
+        res.status(400).json({ message : error.message })
+    }
+});
+
+server.post("/api/login", async (req, res) => {
+    try {
+        res.json(await loginUser(req.body));
+    } catch (error) {
+        res.status(400).json({message:error.message})
+    }
 });
 
 server.get("/", async (req, res) => {
