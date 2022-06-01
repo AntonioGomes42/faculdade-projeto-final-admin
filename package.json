@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "sass": "sass --no-source-map --watch public/sass:public/css",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "keywords": [
     "prática profissional",
