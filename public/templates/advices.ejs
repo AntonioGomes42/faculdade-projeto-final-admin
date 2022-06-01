@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/advices.css">
+    <title>infoChurch</title>
+</head>
+<body>
+    
+    <header>
+       <h1 class="title-text"> infoChurch <br> ADMINISTRADOR</h1>
+       <nav class="desktop">
+            <ul>
+                <li><a class="underline-animation desktop-menu" href="/">Home</a></li>
+                <li><a class="underline-animation desktop-menu" href="/avisos">Avisos</a></li>
+                <li><a class="underline-animation desktop-menu" href="/eventos">Eventos</a></li>
+                <li><a class="underline-animation desktop-menu" href="/midias">Mídias</a></li>
+                <li><a class="underline-animation desktop-menu" href="/sobre">Sobre</a></li>
+            </ul>
+       </nav>
+       <svg id="open-menu" class="menu-small-devices" xmlns="http://www.w3.org/2000/svg" fill="#000" height="46" width="35"><path d="M8 22.5V19.5H40V22.5ZM8 28.5V25.5H40V28.5Z"/></svg>
+    </header>
+    <div class="overlay"></div>
+
+    <div class="mobile-menu">
+        <nav>
+            <a class="" href="/">Home</a>
+            <a class="" href="/avisos">Avisos</a>
+            <a class="" href="/eventos">Eventos</a>
+            <a class="" href="/midias">Mídias</a>
+            <a class="" href="/sobre">Sobre</a>
+        </nav>
+        <svg  class="remove" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+    </div>
+
+    <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h5 class="modal-title" id="exampleModalLabel">Editar Aviso</h5>
+            </div>
+            <div class="modal-body">
+                <form id="edit-form">
+                    <div class="form-group">
+                        <label for="edit-day" class="col-form-label">Dia da Semana</label>
+                        <input name="edit-day" type="text" class="form-control" id="edit-day"required  oninvalid="this.setCustomValidity('Insira um dia da semana, este campo não pode ser vazio.')"
+                        oninput="this.setCustomValidity('')">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-time" class="col-form-label">Horário</label>
+                        <input type="text" class="form-control" id="edit-time" required  oninvalid="this.setCustomValidity('Insira um horário, este campo não pode ser vazio.')"
+                        oninput="this.setCustomValidity('')">
+                        </div>
+                    <div class="form-group">
+                        <label for="edit-description" class="col-form-label">Descrição</label>
+                        <textarea class="form-control" id="edit-description" required  oninvalid="this.setCustomValidity('Insira uma descrição, este campo não pode ser vazio.')"
+                        oninput="this.setCustomValidity('')"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            <button id="remove-advice" type="button" class="btn btn-danger" data-dismiss="modal">Deletar</button>
+            <button id="close-changes" type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button id="save-changes" form="edit-form" type="button" class="btn btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h5 class="modal-title" id="exampleModalLabel">Editar Aviso</h5>
+            </div>
+            <div class="modal-body">
+                <form id="create-form">
+                    <div class="form-group">
+                        <label for="create-day" class="col-form-label">Dia da Semana</label>
+                        <input name="create-day" type="text" class="form-control" id="create-day"required  oninvalid="this.setCustomValidity('Insira um dia da semana, este campo não pode ser vazio.')"
+                        oninput="this.setCustomValidity('')">
+                    </div>
+                    <div class="form-group">
+                        <label for="create-time" class="col-form-label">Horário</label>
+                        <input type="text" class="form-control" id="create-time" required  oninvalid="this.setCustomValidity('Insira um horário, este campo não pode ser vazio.')"
+                        oninput="this.setCustomValidity('')">
+                        </div>
+                    <div class="form-group">
+                        <label for="create-description" class="col-form-label">Descrição</label>
+                        <textarea class="form-control" id="create-description" required  oninvalid="this.setCustomValidity('Insira uma descrição, este campo não pode ser vazio.')"
+                        oninput="this.setCustomValidity('')"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            <button id="close-create" type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button id="save-create" form="create-form" type="button" class="btn btn-primary">Criar Aviso</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Deletar Aviso</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <b>Deseja mesmo deletar este aviso?</b>
+            </div>
+            <div class="modal-footer">
+              <button id="delete-btn" type="button" class="btn btn-danger">Sim</button>
+              <button id="close-delete-btn" type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <main>
+        <div title="Adicionar Novo Aviso" id="add-button">
+            <img src="https://img.icons8.com/ios-filled/50/undefined/add--v1.png"/>
+        </div>
+        <section class="page-contain">
+            <% dataToRender.forEach(function(advice){ %>
+                <div class="data-card" advice-id="<%=advice.id%>">
+                    <h3 id="day"><%=advice.day%></h3>
+                    <h4 id="time"><%=advice.time%></h4>
+                    <p id="description"><%=advice.description%></p>
+                    <span class="edit-text">
+                      Click para editar
+                    </span>
+                </div>
+            <% }); %>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../scripts/mobileMenu.js"></script>
+    <script src="../scripts/edit-modal.js"></script>
+    <script src="../scripts/create-modal.js"></script>
+</body>
+</html>

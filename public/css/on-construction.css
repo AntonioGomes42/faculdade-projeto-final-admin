@@ -1,0 +1,229 @@
+body {
+  letter-spacing: 2px;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.4em;
+  font-weight: 400;
+}
+body.open-menu {
+  overflow: hidden;
+}
+body ul {
+  list-style: none;
+  text-decoration: none;
+}
+body ul li a {
+  text-decoration: none;
+  color: black;
+}
+body header {
+  margin: 0 auto;
+  padding: 30px 20px 0px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1732px;
+}
+body header h1.title {
+  margin: 0;
+  font-size: 1em;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.4em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+body header nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+body header nav ul {
+  padding-left: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+body header nav ul li {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.4em;
+  font-weight: 400;
+  margin-right: 30px;
+}
+body header nav ul li:nth-last-child(1) {
+  margin-right: 20px;
+}
+body header nav ul li a {
+  position: relative;
+  display: inline-block;
+  padding: 1.5px;
+  color: black;
+  font-size: 1.05em;
+}
+body header nav ul li a.underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  transform-origin: bottom right;
+  transition: transform 0.5s ease-out;
+}
+body header nav ul li a.underline-animation:hover:after {
+  font-weight: 600;
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+body header nav.desktop {
+  display: none;
+}
+body div.overlay {
+  display: flex;
+  z-index: 2;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5215686275);
+  position: fixed;
+  left: -100%;
+  top: 0;
+  transition: all 500ms ease-in-out;
+}
+body div.overlay.open-menu {
+  left: 0;
+}
+body div.open-menu {
+  display: flex;
+}
+body div.mobile-menu {
+  flex-direction: row;
+  padding: 10%;
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  height: 100vh;
+  z-index: 3;
+  position: fixed;
+  background-color: black;
+  right: -100%;
+  top: 0;
+  transition: all 1s ease-in-out;
+}
+body div.mobile-menu.open-menu {
+  right: 0px;
+}
+body div.mobile-menu nav {
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-right: 20px;
+  padding-top: 50px;
+  align-items: center;
+}
+body div.mobile-menu nav a {
+  text-decoration: none;
+  margin-top: 20px;
+  pointer-events: all;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  width: 100%;
+  color: #fff;
+}
+body main {
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+body main img.under-construction {
+  width: 100%;
+}
+body main p {
+  letter-spacing: 2.3px;
+  font-weight: 600;
+  text-align: center;
+  padding: 70px 50px 100px 50px;
+}
+body footer {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  min-height: 400px;
+  width: 100%;
+  background-color: black;
+  color: white;
+}
+body footer div.address {
+  padding: 50px;
+}
+body footer div.address a {
+  font-size: 1.2em;
+  letter-spacing: 2.1px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+body footer div.address div.street {
+  margin-bottom: 12px;
+}
+body footer div.contact {
+  padding: 20px 50px 50px 50px;
+}
+body footer div.contact a {
+  font-size: 1.2em;
+  letter-spacing: 2.3px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+body footer div.contact div.number {
+  margin-bottom: 12px;
+}
+body footer a {
+  text-decoration: none;
+  font-style: none;
+  color: white;
+}
+
+@media screen and (min-width: 768px) {
+  body header {
+    padding: 30px 40px 0px 40px;
+  }
+  body footer {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  body footer div.address, body footer div.contact {
+    padding-top: 50px;
+  }
+}
+@media screen and (min-width: 1020px) {
+  body header svg.menu-small-devices {
+    display: none;
+  }
+  body header nav.desktop {
+    display: flex;
+  }
+  body div.overlay, body div.mobile-menu {
+    display: none;
+  }
+}
