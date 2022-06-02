@@ -1,25 +1,34 @@
 import express from "express";
-import { getAdvices, getAdviceById, createAdvice, updateAdvice, deleteAdvice } from "./services/advices.services.js";
-import path from "path";
-import { dirname } from 'path';
+import { getAllAdvices, getAdviceById, createAdvice, updateAdvice, deleteAdvice } from "./services/advices.services.js";
+import path, { dirname } from "path";
 import { fileURLToPath } from 'url';
 import favicon from "serve-favicon";
 import { createUser, loginUser } from "./services/auth.js";
 
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const port = 3000;
 const server = express();
+const port = process.env.PORT || 3000;
 
+// - MIDDLEWARES -
 server.use(express.urlencoded({ extended: false }));
+server.use(express.json());
 server.use(favicon(path.join(__dirname, 'public', 'images/favicon.ico')))
 server.use(express.static('public'));
-server.set('view engine', 'ejs');
 server.set('views', path.join(__dirname, '/public/templates'));
-server.use(express.json());
+server.set('view engine', 'ejs');
+
+// ROTAS DE AUTENTICAÇÃO.
 
 server.get("/login", async (req, res) => {
     res.render('login');
+});
+
+server.post("/api/login", async (req, res) => {
+    try {
+        res.json(await loginUser(req.body));
+    } catch (error) {
+        res.status(400).json({message:error.message})
+    }
 });
 
 server.get("/cadastro", async (req, res) => {
@@ -34,37 +43,19 @@ server.post("/api/cadastro", async (req, res) => {
     }
 });
 
-server.post("/api/login", async (req, res) => {
-    try {
-        res.json(await loginUser(req.body));
-    } catch (error) {
-        res.status(400).json({message:error.message})
-    }
-});
+// ROTAS DA API - PARA LER, CRIAR, ATUALIZAR E DELETAR UM AVISO.
 
 server.get("/", async (req, res) => {
     res.render('home');
 });
 
-server.get("/api/avisos", async (req, res) => {
-    res.json(await getAdvices());
-});
-
 server.get("/avisos", async (req, res) => {
-    const advices = await getAdvices();
-    res.render('advices', { dataToRender:advices });
+    const advices = await getAllAdvices();
+    res.render('advices', { dataToRender: advices });
 });
 
-server.get("/eventos", async (req, res) => {
-    res.render('on-construction');
-});
-
-server.get("/midias", async (req, res) => {
-    res.render('on-construction');
-});
-
-server.get("/sobre", async (req, res) => {
-    res.render('on-construction');
+server.get("/api/avisos", async (req, res) => {
+    res.json(await getAllAdvices());
 });
 
 server.get("/api/avisos/:id", async (req, res) => {
@@ -104,15 +95,27 @@ server.put("/api/avisos/:id", async (req, res) => {
 server.delete("/api/avisos/:id", async (req, res) => {
     try {
         if (!(JSON.parse(JSON.stringify(req.params)).hasOwnProperty("id"))) {
-            throw new Error("Informe o id do advice pelos parametros.")    
+            throw new Error("Informe o id do advice pelos parametros.")
         }
         const deletedAdvice = await deleteAdvice(req.params.id);
         res.status(200).send(deletedAdvice);
     } catch (error) {
         res.status(400).send(error.message);
     }
-})
+});
 
-server.listen(process.env.PORT || port, () => {
+server.get("/eventos", async (req, res) => {
+    res.render('on-construction');
+});
+
+server.get("/midias", async (req, res) => {
+    res.render('on-construction');
+});
+
+server.get("/sobre", async (req, res) => {
+    res.render('on-construction');
+});
+
+server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 })

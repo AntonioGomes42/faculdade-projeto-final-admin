@@ -19,6 +19,17 @@ const userConverter = {
     }
 };
 
+function validatePassword(password) {
+  return new Promise((res) => {
+      let isValidPassword = true;
+      const regexValidation = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/;
+    if (!(password.match(regexValidation))) { 
+          isValidPassword = false;
+    }
+      res(isValidPassword);
+  })
+}
+
 function isThereAnyUser(users) {
     return new Promise((res) => {
         const alreadyUser = [];
@@ -66,7 +77,6 @@ async function createUser(body) {
     if (!(JSON.parse(JSON.stringify(body)).hasOwnProperty("name"))) {
       throw new Error(errorMessage);
     } else {
-      console.log("aqui");
       isEmptyString(body.name, errorMessage);
       name = body.name;
     }
@@ -75,27 +85,42 @@ async function createUser(body) {
     if (!(JSON.parse(JSON.stringify(body)).hasOwnProperty("email"))) {
       throw new Error(errorMessage);
     } else {
-      isEmptyString(body.email, errorMessage);
-      email = body.email;
-      if (await doesUserAlreadyExists(email)) {
-        throw new Error("Usuário já cadastrado com este email.");
+      if (isEmptyString(body.email, errorMessage)) {
+        throw new Error(errorMessage);
       }
+      email = body.email;
     }
   
     errorMessage = "Insira um senha válida, este campo não pode ser vazio.";
     if (!(JSON.parse(JSON.stringify(body)).hasOwnProperty("password"))) {
       throw new Error(errorMessage);
     } else {
-      isEmptyString(body.password, errorMessage);
+      if (isEmptyString(body.password, errorMessage)) {
+        throw new Error(errorMessage);
+      }
+      const isValidPassword = await validatePassword(body.password);
+      if (!isValidPassword) {
+        throw new Error(`Senha fraca. A senha deve conter: 
+        ●  Pelo menos 8 caracters.
+        ●  Pelo menos 1 número.
+        ●  Pelo menos uma letra minúscula.
+        ●  Pelo menos uma letra maiúscula.
+        ●  Somente letras e números.
+        `);
+      }
       const salt = bcrypt.genSaltSync(10);
       password = bcrypt.hashSync(body.password, salt);
+    }
+  
+    if (await doesUserAlreadyExists(email)) {
+      throw new Error("Usuário já cadastrado com este email.");
     }
   
     try {
       const id = uuidv4();
       const ref = doc(db, "users", id).withConverter(userConverter);
       await setDoc(ref, new User(name, email, password));
-      return {id, name, email, password};
+      return {id, name, email};
     } catch (error) {
       throw error;
     }

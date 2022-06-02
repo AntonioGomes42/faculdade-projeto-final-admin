@@ -5,27 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/usercreated.css">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
     <title>infoChurch Admin</title>
 </head>
 <body>
     <div class="container" id="container">
         <div class="form-container sign-in-container">
-            <form action="#">
-                <h1>Cadastrar</h1>
+            <form id="register-form" action="#">
+                <h1 id="title">Cadastrar</h1>
                 <p>Insira os dados abaixo para cadastrar o seu usuário.</p>
-                <input type="email" placeholder="Digite seu nome" required  oninvalid="this.setCustomValidity('Insira o seu nome, este campo é obrigatório.')"
+                <input id="name" type="name" placeholder="Digite seu nome" required  oninvalid="this.setCustomValidity('Insira o seu nome, este campo é obrigatório.')"
                 oninput="this.setCustomValidity('')" />
-                <input type="email" placeholder="Digite o email" required  oninvalid="this.setCustomValidity('Insira o email, este campo é obrigatório.')"
+                <input id="email" type="email" placeholder="Digite o email" required  oninvalid="this.setCustomValidity('Insira o email, este campo é obrigatório.')"
                 oninput="this.setCustomValidity('')" />
-                <input type="password" placeholder="Digite a senha" required  oninvalid="this.setCustomValidity('Insira a senha, este campo é obrigatório.')"
+                <input id="password" type="password" placeholder="Digite a senha" required  oninvalid="this.setCustomValidity('Insira a senha, este campo é obrigatório.')"
                 oninput="this.setCustomValidity('')" />
-                <button>Cadastrar</button>
+                <button id="register-btn">Cadastrar</button>
                 <span id="span-account">
                     Já possui uma conta? <a href="/login"><b>Clique aqui para logar</b></a>
                 </span>
             </form>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../scripts/register.js"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ const adviceConverter = {
   }
 };
 
-async function getAdvices() {
+async function getAllAdvices() {
   const querySnapshot = await getDocs(collection(db, "advices"));
   const advicesList = await filterData(querySnapshot);
   return advicesList;
@@ -119,4 +119,4 @@ async function deleteAdvice(id) {
   }
 }
 
-export { getAdvices, getAdviceById, createAdvice, updateAdvice, deleteAdvice };
+export { getAllAdvices, getAdviceById, createAdvice, updateAdvice, deleteAdvice };

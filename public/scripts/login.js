@@ -1,7 +1,7 @@
-const emailLoginField = document.querySelector("input#email");
-const passwordLoginField = document.querySelector("input#password");
-const buttonLogin = document.querySelector("button#login-btn");
 const loginForm = document.querySelector("form#login-form");
+const emailLoginField = loginForm.querySelector("input#email");
+const passwordLoginField = loginForm.querySelector("input#password");
+const buttonLogin = loginForm.querySelector("button#login-btn");
 const h1FormTitle = loginForm.querySelector("h1");
 
 const alertBadRequest= document.createElement("div");
@@ -22,8 +22,7 @@ buttonLogin.addEventListener("click", async (e) => {
         }
         alertBadRequest.innerText = `${error.response.data.message}`;
         loginForm.insertBefore(alertBadRequest, h1FormTitle);
-    });
-    console.log("done");
+    }); 
 })
 
 async function loginUser(dataLogin) {
