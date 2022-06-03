@@ -17,7 +17,7 @@ Link do vídeo no Youtube: [Vídeo de demonstração](https://www.youtube.com/wa
 
 ## Rotas
 
-### A aplicação Administrativa contém todas as rotas da aplicação pública: [Repositório da aplicação pública]() mais as de cadastro e login.
+### A aplicação Administrativa contém todas as rotas da aplicação pública: [Repositório da aplicação pública](https://github.com/AntonioGomes42/faculdade-projeto-final-public) mais as de cadastro e login.
 
 Para ter acesso as rotas para edição de conteúdo na aplicação administrativa é necessário estar loggado em uma conta registrada no banco de dados, o registro das contas pode ser feito através da mesma aplicação.
 
