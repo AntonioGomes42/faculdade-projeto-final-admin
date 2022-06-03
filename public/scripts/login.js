@@ -12,12 +12,11 @@ buttonLogin.addEventListener("click", async (e) => {
     e.preventDefault();
     await loginUser({ email: emailLoginField.value, password: passwordLoginField.value }).then(
         (result) => {
-            console.log(result.data);
+            window.location.href = '/';
         }
     ).catch((error) => {
         if (error.response.status == 400) {
             alertBadRequest.innerText = `${error.response.data.message}`  
-            console.log(error.response.data.message);
             loginForm.insertBefore(alertBadRequest, h1FormTitle);
         }
         alertBadRequest.innerText = `${error.response.data.message}`;
@@ -31,6 +30,7 @@ async function loginUser(dataLogin) {
         headers: {'content-type': 'application/json'},
         data: JSON.stringify(dataLogin),
         url: `/api/login`,
+        withCredentials: true
     };
     return axios(options);
 }

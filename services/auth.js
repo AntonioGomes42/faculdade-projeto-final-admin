@@ -155,13 +155,11 @@ async function loginUser(body) {
     }
 
     const passwordIsCorrect = await bcrypt.compare(password, user.password);
-    if (passwordIsCorrect) {
-        console.log("Logged in");    
-    } else {
-        throw new Error("Usuário ou senha inválido.");
+    if (!passwordIsCorrect) {
+      throw new Error("Usuário ou senha inválido.");
     }
-
+  
     return { id: user.id, name: user.name, email:user.email };
 }
 
-export { createUser, loginUser }
+export { createUser, loginUser, getUserByEmail }
